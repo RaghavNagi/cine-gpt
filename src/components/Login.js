@@ -66,8 +66,6 @@ const Login = () => {
                   photoURL: photoURL,
                 })
               );
-
-              navigate("/browse");
             })
             .catch((error) => {
               // An error occurred
