@@ -6,8 +6,8 @@ const VideoTitle = ({title, overview}) => {
         <h1 className="text-4xl font-bold">{title}</h1>
         <p className="py-6 text-lg w-5/6">{overview}</p>
         <div>
-            <button>Play</button>
-            <button>More Info</button>
+            <button className="bg-gray-500 text-white p-4 px-10 text-xl bg-opacity-50 rounded-lg">▶️ Play</button>
+            <button className="mx-4 bg-gray-500 text-white p-4 px-10 text-xl bg-opacity-50 rounded-lg">More Info</button>
         </div>
     </div>
   )
