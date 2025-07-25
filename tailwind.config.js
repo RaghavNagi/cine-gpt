@@ -4,7 +4,14 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      textShadow: {
+        'md': '0 2px 4px rgba(0, 0, 0, 0.5)',
+        
+        // Defining different sizes for the white shadow
+        'white-sm': '0 1px 2px rgba(255, 255, 255, 1)', // Small & sharp
+      }
+    },
   },
-  plugins: [],
+  plugins: [require('tailwindcss-textshadow')],
 }
