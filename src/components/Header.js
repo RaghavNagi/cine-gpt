@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { addUser, removeUser } from "../utils/userSlice";
+import { toggleGptSearchView } from "../utils/gptSlice";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -21,6 +22,10 @@ const Header = () => {
         navigate("/error");
       });
   };
+  const handleGptSearchClick  =() =>{
+    // Toggle GPT search
+    dispatch(toggleGptSearchView());
+  }
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -55,6 +60,9 @@ const Header = () => {
         alt="logo"
       />
       {user &&(<div className="flex justify-end gap-2">
+        <button className="py-2 px-4 m-2 bg-purple-600 text-white rounded-md font-bold"
+        onClick={handleGptSearchClick}
+        >GPT Search</button>
         {/* <img className="w-12 h-12 mt-2" src={user?.photoURL} alt="user-icon" /> */}
         <img className="w-12 h-12 mt-2" src={userImg} alt="user-icon" />
         <button

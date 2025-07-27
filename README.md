@@ -102,7 +102,10 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
  - Different list for secondary container 
  using custom hooks (usePopularMovies, useTopRated, useUpcoming)
  - Imported textshadow in tailwind css config file
-
+ - GPT search feature
+ - GPT search page
+ - GPT search bar
+ 
 # Features
  - Login / SignUp
     - SignIn / SignUp (form)
