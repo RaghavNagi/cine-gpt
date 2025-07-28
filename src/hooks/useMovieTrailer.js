@@ -6,7 +6,6 @@ import { useEffect} from "react";
 const useMovieTrailer = (movieId) =>{
     
     const dispatch = useDispatch();
-    console.log(movieId);
     
     
     const getMovieVideo = async () => {
