@@ -1,8 +1,19 @@
 import React, { useRef } from "react";
 import { geminiApi } from "../utils/geminiApi";
+import { API_OPTIONS } from "../utils/constants";
+import { addGeminiMovieResult } from "../utils/gptSlice";
+import { useDispatch } from "react-redux";
 
 const GptSearchBar = () => {
   const searchText = useRef(null);
+  const dispatch = useDispatch();
+
+  // search movie in TMDB
+  const searchMovieTMDB = async(movie) => {
+    const data = await fetch("https://api.themoviedb.org/3/search/movie?query="+movie+"&include_adult=false&language=en-US&page=1", API_OPTIONS)
+    const json = await data.json();
+    return json.results;
+  }
 
   const handleGeminiSearchClick = async () => {
     console.log(searchText.current.value);
@@ -13,16 +24,23 @@ const GptSearchBar = () => {
       "You are a helpful movie recommendation assistant. " +
       searchText.current.value +
       gptQuery;
-    const geminiResult = await geminiApi(fullPrompt);
+    const geminiResult = await geminiApi(fullPrompt);    
 
     const geminiMovies = geminiResult.split(",");
-    // with split() it will return an array
+    // with split() it will return an array    
 
-    console.log(geminiMovies);
+    // for each movie search TMDB API
+    const promiseArray = geminiMovies.map(movie => searchMovieTMDB(movie.trim()));
+    // [promise1, promise2, promise3, promise4, promise5]
+
+
+    const tmdbResults = await Promise.all(promiseArray);
+    console.log(tmdbResults);
     
+    dispatch(addGeminiMovieResult({movieNames: geminiMovies ,movieResults: tmdbResults}));
   };
 
-  
+ 
 
   return (
     <div className="pt-[10%] flex justify-center bg-[#212121]">
